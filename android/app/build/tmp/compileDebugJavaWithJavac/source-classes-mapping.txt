@@ -1,0 +1,14 @@
+com/xmppchatdemo/ReactNativeFlipper.java
+ com.xmppchatdemo.ReactNativeFlipper
+ com.xmppchatdemo.ReactNativeFlipper$1
+ com.xmppchatdemo.ReactNativeFlipper$2
+ com.xmppchatdemo.ReactNativeFlipper$2$1
+com/xmppchatdemo/BuildConfig.java
+ com.xmppchatdemo.BuildConfig
+com/xmppchatdemo/MainApplication.java
+ com.xmppchatdemo.MainApplication
+ com.xmppchatdemo.MainApplication$1
+com/xmppchatdemo/MainActivity.java
+ com.xmppchatdemo.MainActivity
+com/facebook/react/PackageList.java
+ com.facebook.react.PackageList
