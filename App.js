@@ -39,9 +39,11 @@ const xmpp = client({
   service: "ws://chat.acumencog.com:5280/xmpp-websocket/",
   domain: "chat.acumencog.com",
   resource: "android",
-  username: "priyanshu",
-  password: "asdqwe123",
+  username: "daksh123",
+  password: "Aa@123456",
 });
+
+const loggedUser = 'daksh123@chat.acumencog.com'
 
 
 
@@ -103,10 +105,10 @@ sendMessage = () => {
 };
 
 createGroup = async() => {
-  const user = '77cf780f-96cd-4f84-8ca2-d06ee7627f27@conference.chat.acumencog.com/priyanshu'
+  const user = 'newgroup@conference.chat.acumencog.com/daksh123'
  const message = xml(
     'presence',
-    {  from:'priyanshu@chat.acumencog.com/android',to: user, id:'111111'},
+    {  from:loggedUser + '/daksh',to: user},
     xml(
       'x', {xmlns:'http://jabber.org/protocol/muc'}
     )
@@ -117,11 +119,11 @@ createGroup = async() => {
 }
 
 groupMessage = async() => {
-  const user = '77cf780f-96cd-4f84-8ca2-d06ee7627f27@conference.chat.acumencog.com'
+  const user = 'newgroup@conference.chat.acumencog.com'
   const base64image = 'image_in_base64'
   const message = xml(
     "message",
-    { type: 'groupchat', from:"priyanshu@chat.acumencog.com/android", to:user},
+    { type: 'groupchat', from:loggedUser + "/android", to:user},
     xml("body", {}, 'message in group'),
   );
   console.log(message.toString())
@@ -129,14 +131,35 @@ groupMessage = async() => {
 }
 
 sendSubscribe = async() => {
-  const user = 'satender@chat.acumencog.com'
+  const user = 'priyanshu@chat.acumencog.com'
   const base64image = 'image_in_base64'
   const message = xml(
     "presence",
-    { type: 'subscribe', to:user}
+    { type: 'subscribed', to:user}
   );
   console.log(message.toString())
   await xmpp.send(message)
+}
+//<iq from='hag66@shakespeare.lit/pda'
+//    id='gp7w61v3'
+//    to='wiccarocks@shakespeare.lit/laptop'
+//    type='get'>
+//  <query xmlns='http://jabber.org/protocol/disco#items'
+//         node='http://jabber.org/protocol/muc#rooms'/>
+//</iq>
+getRoomParticipants = async() => {
+  const groupName= 'newgroup@conference.chat.acumencog.com/pk'
+  const stanza = xml(
+    'iq',
+    {  from:loggedUser+'/android',to: groupName, type:'get', id:'hyug45'},
+    xml(
+      'query', {xmlns:'http://jabber.org/protocol/disco#items', node:'http://jabber.org/protocol/muc#rooms'}
+    )
+  );
+
+  console.log(stanza.toString())
+  await xmpp.send(stanza)
+
 }
 const Section = ({ children, title }): Node => {
 
@@ -190,6 +213,9 @@ const App: () => Node = () => {
       <Text />
       <Text />
       <Button onPress={() => sendSubscribe()} title='Subscribe'></Button>
+      <Text />
+      <Text />
+      <Button onPress={() => getRoomParticipants()} title='get part'></Button>
 
     </SafeAreaView>
   );
