@@ -32,18 +32,18 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const { client, xml } = require("@xmpp/client");
-const stanzaToSend = '<message to="lucky@chat.acumencog.com/AstraChat-Android-979416" type="chat" xmlns="jabber:client" from="priyanshu123@chat.acumencog.com/android"><body>Hi</body><request xmlns="urn:xmpp:receipts"/><active xmlns="http://jabber.org/protocol/chatstates"/></message>'
+//const stanzaToSend = '<message to="lucky@chat.acumencog.com/AstraChat-Android-979416" type="chat" xmlns="jabber:client" from="priyanshu123@chat.acumencog.com/android"><body>Hi</body><request xmlns="urn:xmpp:receipts"/><active xmlns="http://jabber.org/protocol/chatstates"/></message>'
 //this.state.status = 'offline';
 const debug = require("@xmpp/debug");
 const xmpp = client({
-  service: "ws://chat.acumencog.com:5280/xmpp-websocket/",
-  domain: "chat.acumencog.com",
+  service: "wss://chat.lifepoints.de:5281/xmpp-websocket/",
+  domain: "chat.lifepoints.de",
   resource: "android",
-  username: "daksh123",
-  password: "Aa@123456",
+  username: "priyanshu124",
+  password: "password",
 });
 
-const loggedUser = 'daksh123@chat.acumencog.com'
+const loggedUser = 'priyanshu124@chat.lifepoints.de'
 
 
 
@@ -65,11 +65,11 @@ sendMessage = () => {
       //await xmpp.send(xml("presence"), { type: "unavailable" });
       //await xmpp.stop();
       console.log('In Message Block =======>>')
-      console.log(stanza.attr('from') + '    & message is' + stanza.getChildText('body'))
+      console.log(stanza.attr('from') + '    & message is' + stanza.getChildText('body') + '\n'+ stanza.getChildText('image'))
     }
     //await xmpp.send(xml("presence"))
   });
-  var user = 'satender@chat.acumencog.com'
+  var user = 'priyanshu124@chat.lifepoints.de'
   xmpp.on("online", async (address) => {
     console.log('Online')
     console.log("online as", address.toString());
@@ -90,10 +90,11 @@ sendMessage = () => {
     const message1 = xml(
       "message",
       { type: "chat", to: user },
-      xml("body", {}, "hello message"),
+      xml("body", {}, "ola is uber"),
     );
-    console.log(message.toString())
-    //await xmpp.send(message);
+    console.log(message1.toString())
+
+    await xmpp.send(message1);
     // await xmpp.stop();
     //this.state.status = 'online'
     console.log('you are now online')
@@ -105,10 +106,10 @@ sendMessage = () => {
 };
 
 createGroup = async() => {
-  const user = 'newgroup@conference.chat.acumencog.com/daksh123'
+  const user = 'newrgroup_3@conference.chatqa.lifepoints.de/shubh_3'
  const message = xml(
     'presence',
-    {  from:loggedUser + '/daksh',to: user},
+    {  from:loggedUser + '/pd1_4',to: user},
     xml(
       'x', {xmlns:'http://jabber.org/protocol/muc'}
     )
@@ -119,19 +120,20 @@ createGroup = async() => {
 }
 
 groupMessage = async() => {
-  const user = 'newgroup@conference.chat.acumencog.com'
+  const user = 'newrgroup_3@conference.chatqa.lifepoints.de'
   const base64image = 'image_in_base64'
   const message = xml(
     "message",
     { type: 'groupchat', from:loggedUser + "/android", to:user},
     xml("body", {}, 'message in group'),
+    xml("image",{}, 'imageHere'),
   );
   console.log(message.toString())
   await xmpp.send(message)
 }
 
 sendSubscribe = async() => {
-  const user = 'priyanshu@chat.acumencog.com'
+  const user = 'daksh1234@chatqa.lifepoints.de'
   const base64image = 'image_in_base64'
   const message = xml(
     "presence",
